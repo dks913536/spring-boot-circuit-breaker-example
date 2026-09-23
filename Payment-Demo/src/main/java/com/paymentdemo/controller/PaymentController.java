@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/payment")
 public class PaymentController {
 
-    @GetMapping("/pay")
+    @GetMapping("/payment/pay")
     public String processPayment(){
         if(new Random().nextInt(10) <7){
             throw  new RuntimeException("PaymentController service down!");
