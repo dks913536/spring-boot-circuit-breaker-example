@@ -11,12 +11,15 @@ public class OrderService {
     @Autowired
     private PaymentClient paymentClient;
 
-    @CircuitBreaker(name = "Payment-Demo",fallbackMethod = "fallbackMethod")
+    @CircuitBreaker(name = "payment-demo",fallbackMethod = "fallbackMethod")
     public String placeOrder(){
         return paymentClient.makePayment();
     }
 
-    public String fallbackMethod(Exception e){
+    public String fallbackMethod(Throwable ex){
+        System.out.println("CIRCUIT BREAKER FALLBACK CALLED!");
+        System.out.println("Exception: " + ex.getClass().getName());
+        System.out.println("Message: " + ex.getMessage());
         return "Payment service is temporarily unavailable. Please try later.";
     }
 }

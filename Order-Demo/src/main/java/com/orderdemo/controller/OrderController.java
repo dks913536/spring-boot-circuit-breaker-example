@@ -1,20 +1,20 @@
-package com.orderdemo;
+package com.orderdemo.controller;
 
 import com.orderdemo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/place")
-    private String placeOrder(){
-        return orderService.placeOrder();
+    // http://localhost:8080/create
+    @PostMapping("/create")
+    public String createOrder(){
+        String details=orderService.placeOrder();
+        return details;
     }
 }
